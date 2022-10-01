@@ -1,12 +1,13 @@
 package com.example.demo;
 
-import java.net.URISyntaxException;
 import java.util.List;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -18,24 +19,36 @@ public class CustomerController {
         this.customerRepository = customerRepository;
     }
 
-    @GetMapping("/test")
-    public String test() {
-        return "Hello World!";
-    }
-
     @GetMapping("/customers")
     public List<Customer> getAllCustomers() {
         return customerRepository.findAll();
     }
 
-    @GetMapping("/customer")
-    public Customer getCustomer(@RequestParam String name) {
+    @GetMapping("/customers/{name}")
+    public Customer getCustomer(@PathVariable String name) {
         return customerRepository.findByName(name);
     }
 
-    @PostMapping("/customer")
-    public Customer createCustomer(@RequestBody Customer customer) throws URISyntaxException {
+    @PostMapping("/customers")
+    public Customer createCustomer(@RequestBody Customer customer) {
         return customerRepository.save(customer);
     }
-    
+
+    @PutMapping("/customers/{id}")
+    public Customer updateCustomer(@RequestBody Customer newCustomer, @PathVariable Long id) {
+        return customerRepository.findById(id)
+            .map(customer -> {
+                customer.setSchema(newCustomer.getSchema());
+                customer.setName(newCustomer.getName());
+                return customerRepository.save(customer);
+            }).orElseGet(() -> {
+                newCustomer.setId(id);
+                return customerRepository.save(newCustomer);
+            });
+    }
+
+    @DeleteMapping("/customers/{id}")
+    public void deleteCustomer(@PathVariable Long id) {
+        customerRepository.deleteById(id);
+    }
 }
