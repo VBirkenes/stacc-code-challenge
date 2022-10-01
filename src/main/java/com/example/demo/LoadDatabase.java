@@ -14,7 +14,7 @@ public class LoadDatabase {
     @Bean
     CommandLineRunner initDatabase(CustomerRepository repository) {
         return args -> {
-            log.info("Preloading " + repository.save(new Customer("Person", "Joe Biden")));
+            log.info("Preloading " + repository.save(new Customer("NK-23wLbkLretoJxTci3VMZwE","Person", "Joe Biden", "Baiden Džo", "1942-11-20", "us", "", "Q6279", "", "", "", "Every Politician", "2021-07-26 11:55:45", "2021-10-07 03:02:59")));
         };
     }
     

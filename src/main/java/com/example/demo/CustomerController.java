@@ -35,7 +35,7 @@ public class CustomerController {
     }
 
     @PutMapping("/customers/{id}")
-    public Customer updateCustomer(@RequestBody Customer newCustomer, @PathVariable Long id) {
+    public Customer updateCustomer(@RequestBody Customer newCustomer, @PathVariable String id) {
         return customerRepository.findById(id)
             .map(customer -> {
                 customer.setSchema(newCustomer.getSchema());
@@ -48,7 +48,7 @@ public class CustomerController {
     }
 
     @DeleteMapping("/customers/{id}")
-    public void deleteCustomer(@PathVariable Long id) {
+    public void deleteCustomer(@PathVariable String id) {
         customerRepository.deleteById(id);
     }
 }
