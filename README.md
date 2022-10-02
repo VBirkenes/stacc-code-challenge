@@ -17,7 +17,7 @@ Run backend: Navigate to the source folder "demo" then run command below. By def
 ```
 ./mvnw spring-boot:run
 ```
-Run frontend: Navigate to the folder called "frontend". Then run following commands.
+Run frontend: Navigate to the folder called "frontend". Then run following commands. By default frontend is run on port 3000. HTTP requests are proxied to port 8080.
 ```
 npm install
 npm start
