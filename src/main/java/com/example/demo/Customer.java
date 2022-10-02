@@ -34,18 +34,29 @@ public class Customer {
     }
 
     @Override
+    public int hashCode() {
+        return Objects.hash(id, schema, name);
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Customer customer = (Customer) o;
         return Objects.equals(id, customer.id) &&
                 Objects.equals(schema, customer.schema) &&
-                Objects.equals(name, customer.name);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, schema, name);
+                Objects.equals(name, customer.name) &&
+                Objects.equals(aliases, customer.aliases) &&
+                Objects.equals(birth_date, customer.birth_date) &&
+                Objects.equals(countries, customer.countries) &&
+                Objects.equals(addresses, customer.addresses) &&
+                Objects.equals(identifiers, customer.identifiers) &&
+                Objects.equals(sanctions, customer.sanctions) &&
+                Objects.equals(phones, customer.phones) &&
+                Objects.equals(emails, customer.emails) &&
+                Objects.equals(dataset, customer.dataset) &&
+                Objects.equals(last_seen, customer.last_seen) &&
+                Objects.equals(first_seen, customer.first_seen);
     }
 
     @Override
@@ -54,6 +65,17 @@ public class Customer {
                 "id=" + id +
                 ", schema='" + schema + '\'' +
                 ", name='" + name + '\'' +
+                ", aliases='" + aliases + '\'' +
+                ", birth_date='" + birth_date + '\'' +
+                ", countries='" + countries + '\'' +
+                ", addresses='" + addresses + '\'' +
+                ", identifiers='" + identifiers + '\'' +
+                ", sanctions='" + sanctions + '\'' +
+                ", phones='" + phones + '\'' +
+                ", emails='" + emails + '\'' +
+                ", dataset='" + dataset + '\'' +
+                ", last_seen='" + last_seen + '\'' +
+                ", first_seen='" + first_seen + '\'' +
                 '}';
     }
 
