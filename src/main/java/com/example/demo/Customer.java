@@ -3,21 +3,34 @@ package com.example.demo;
 import java.util.Objects;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
 public class Customer {
     
-    private @Id @GeneratedValue Long id;
-    private String schema;
-    private String name;
+    private @Id String id;
+    private String schema, name, aliases, birth_date, countries, addresses, identifiers, 
+    sanctions, phones, emails, dataset, last_seen, first_seen;
 
     public Customer() {}
 
-    public Customer(String schema, String name) {
-        this.schema = schema;
-        this.name = name;
+    public Customer(String id, String schema, String name, String aliases, String birth_date, String countries,
+        String addresses, String identifiers, String sanctions, String phones, String emails, String dataset,
+        String last_seen, String first_seen) {
+            this.id = id;
+            this.schema = schema;
+            this.name = name;
+            this.aliases = aliases;
+            this.birth_date = birth_date;
+            this.countries = countries;
+            this.addresses = addresses;
+            this.identifiers = identifiers;
+            this.sanctions = sanctions;
+            this.phones = phones;
+            this.emails = emails;
+            this.dataset = dataset;
+            this.last_seen = last_seen;
+            this.first_seen = first_seen;
     }
 
     @Override
@@ -35,11 +48,20 @@ public class Customer {
         return Objects.hash(id, schema, name);
     }
 
-    public Long getId() {
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "id=" + id +
+                ", schema='" + schema + '\'' +
+                ", name='" + name + '\'' +
+                '}';
+    }
+
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -59,14 +81,91 @@ public class Customer {
         this.name = name;
     }
 
-    @Override
-    public String toString() {
-        return "Customer{" +
-                "id=" + id +
-                ", schema='" + schema + '\'' +
-                ", name='" + name + '\'' +
-                '}';
+    public String getAliases() {
+        return aliases;
     }
 
+    public void setAliases(String aliases) {
+        this.aliases = aliases;
+    }
 
+    public String getBirthDate() {
+        return birth_date;
+    }
+
+    public void setBirthDate(String birth_date) {
+        this.birth_date = birth_date;
+    }
+
+    public String getCountries() {
+        return countries;
+    }
+
+    public void setCountries(String countries) {
+        this.countries = countries;
+    }
+
+    public String getAddresses() {
+        return addresses;
+    }
+
+    public void setAddresses(String addresses) {
+        this.addresses = addresses;
+    }
+
+    public String getIdentifiers() {
+        return identifiers;
+    }
+
+    public void setIdentifiers(String identifiers) {
+        this.identifiers = identifiers;
+    }    
+
+    public String getSanctions() {
+        return sanctions;
+    }
+
+    public void setSanctions(String sanctions) {
+        this.sanctions = sanctions;
+    }
+
+    public String getPhones() {
+        return phones;
+    }
+
+    public void setPhones(String phones) {
+        this.phones = phones;
+    }
+
+    public String getEmails() {
+        return emails;
+    }
+
+    public void setEmails(String emails) {
+        this.emails = emails;
+    }
+
+    public String getDataset() {
+        return dataset;
+    }
+
+    public void setDataset(String dataset) {
+        this.dataset = dataset;
+    }
+
+    public String getLastSeen() {
+        return last_seen;
+    }
+
+    public void setLastSeen(String last_seen) {
+        this.last_seen = last_seen;
+    }
+
+    public String getFirstSeen() {
+        return first_seen;
+    }
+
+    public void setFirstSeen(String first_seen) {
+        this.first_seen = first_seen;
+    }
 }

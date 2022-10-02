@@ -5,10 +5,14 @@ import Form from 'react-bootstrap/Form'
 
 function App() {
   const [customer, setCustomer] = useState({
-    schema: '',
     name: ''
   })
   const [searchName, setSearchName] = useState('')
+
+  const onFormSubmit = e => {
+    e.preventDefault()
+    performSearch()
+  }
 
   async function performSearch() {
     await fetch(`/customers/${encodeURIComponent(searchName)}`, {
@@ -25,8 +29,6 @@ function App() {
     if (customer.name.length > 0) {
       return (
         <div style={{ display: 'flex', justifyContent: 'center', paddingTop: '20px'}}> 
-        <Card>
-          <Card.Body>
           <table>
             <tbody>
               {Object.entries(customer).map(([key, value]) => {
@@ -38,8 +40,6 @@ function App() {
               })}
             </tbody>
           </table>
-          </Card.Body>
-          </Card>
         </div>
       )
     }
@@ -48,19 +48,23 @@ function App() {
   return (
     <Fragment>
       <div style={{ display: 'flex', justifyContent: 'center'}}>
-        <h1>KYC Check</h1>
+        <Card body style={{ width: '60%', backgroundColor: 'beige', marginTop: '10px', paddingBottom: '40px'}}>
+          <div style={{ display: 'flex', justifyContent: 'center'}}>
+            <h1>KYC Check</h1>
+          </div>
+          <div style={{ display: 'flex', justifyContent: 'center'}}>
+            <Form className='searchForm' onSubmit={onFormSubmit}>
+              <Form.Group controlId='formSearch'>
+                <Form.Control type='search' placeholder='Search for a person' onChange={event => {setSearchName(event.target.value)}}></Form.Control>
+                <Button variant='primary' type='submit'>
+                  Submit
+              </Button>
+              </Form.Group>
+            </Form>
+          </div>
+          <RenderCheck />
+        </Card>
       </div>
-      <div style={{ display: 'flex', justifyContent: 'center'}}>
-        <Form>
-          <Form.Group className='mb-3' controlId='formSearch'>
-            <Form.Control type='search' placeholder='Search for a person' onChange={event => {setSearchName(event.target.value)}}></Form.Control>
-          </Form.Group>
-        </Form>
-        <Button variant="primary" type="submit" onClick={performSearch}>
-          Submit
-        </Button>
-      </div>
-      <RenderCheck />
     </Fragment>
   );
 }
