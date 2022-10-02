@@ -40,6 +40,17 @@ public class CustomerController {
             .map(customer -> {
                 customer.setSchema(newCustomer.getSchema());
                 customer.setName(newCustomer.getName());
+                customer.setAliases(newCustomer.getAliases());
+                customer.setBirthDate(newCustomer.getBirthDate());
+                customer.setCountries(newCustomer.getCountries());
+                customer.setAddresses(newCustomer.getAddresses());
+                customer.setIdentifiers(newCustomer.getIdentifiers());
+                customer.setSanctions(newCustomer.getSanctions());
+                customer.setPhones(newCustomer.getPhones());
+                customer.setEmails(newCustomer.getEmails());
+                customer.setDataset(newCustomer.getDataset());
+                customer.setLastSeen(newCustomer.getLastSeen());
+                customer.setFirstSeen(newCustomer.getFirstSeen());
                 return customerRepository.save(customer);
             }).orElseGet(() -> {
                 newCustomer.setId(id);
